@@ -1,0 +1,25 @@
+{
+  "name": "ff-simge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bot.js",
+  "engines": {
+    "node": "12.x"
+  },
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "dependencies": {
+    "discord.js": "^11.6.2",
+    "express": "^4.17.1",
+    "moment": "^2.27.0",
+    "quick.db": "^7.1.1",
+    "chalk": "^4.1.0",
+    "jimp": "^0.13.0",
+    "fs": "^0.0.2",
+    "http": "^0.0.0",
+    "node-superfetch": "^0.1.10",
+    "common-tags": "^1.8.0",
+    "canvas": "^2.6.1"
+  }
+}
