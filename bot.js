@@ -334,7 +334,7 @@ client.on('messageDelete', async msg => {
   .addField("**Kullanıcı:**", msg.author.tag, true)
   .addField("**Kullanıcı ID:**", msg.author.id, true)
   .addField("**Kanal:**", msg.channel.name, true)
-  .addField("**Silinen Mesaj:**","```"+ message.content +"```")
+  .addField("**Silinen Mesaj:**","```"+ msg.content +"```")
   .setFooter(msg.guild.name+`  •  Bir Mesaj Silindi!`)
   .setColor('RANDOM').setThumbnail(msg.author.avatarURL).setTimestamp()
   await client.channels.get('668389364291862528').send(silindi)});
