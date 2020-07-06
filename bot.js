@@ -328,4 +328,15 @@ client.on('message', (msg) => {
   if (c== '<@!664547930987823156>'){
   return msg.channel.send("Zeynoş Simgenin Sağ kolu olan")}});
 
+client.on('messageDelete', async msg => {
+  if (msg.author.bot) return; if (msg.channel.type === "dm") return;
+  var silindi = new Discord.RichEmbed()
+  .addField("**Kullanıcı:**", msg.author.tag, true)
+  .addField("**Kullanıcı ID:**", msg.author.id, true)
+  .addField("**Kanal:**", msg.channel.name, true)
+  .addField("**Silinen Mesaj:**","```"+ message.content +"```")
+  .setFooter(msg.guild.name+`  •  Bir Mesaj Silindi!`)
+  .setColor('RANDOM').setThumbnail(msg.author.avatarURL).setTimestamp()
+  await client.channels.get('668389364291862528').send(silindi)});
+
 client.login(ayarlar.token);
