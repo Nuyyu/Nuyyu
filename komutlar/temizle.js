@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 
 exports.run = function(client, message, args) {
-  if(message.channel.id === "668389364291862528") message.channel.send(`Sil`)
+  if(message.channel.id === "668389364291862528") message.channel.send(`Sil komutu bu kanalda Yasak`)
   var emojiid = client.emojis.get("664439029135310849")
   if (!message.member.hasPermission("MANAGE_MESSAGES"))
     return message.reply(
