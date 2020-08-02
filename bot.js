@@ -7,8 +7,8 @@ app.get("/", (request, response) => {
 });
 app.listen(process.env.PORT);
 setInterval(() => {
-  http.get(`http://ff-simge.glitch.me`);
-}, 100);
+  http.get(`http://ffsimge.herokuapp.com/`);
+}, 180000);
 
 const Discord = require('discord.js');
 const client = new Discord.Client();
