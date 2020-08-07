@@ -113,11 +113,11 @@ client.elevation = message => {
 //////////////////////// afk ////////////////////////
 client.on("message" , async message => {
   const msg = message;
-  if(message.content.startsWith(ayarlar.prefix+"afk")) return; 
+  if(message.content.startsWith(ayarlar.prefix+"afk")) return;
   let afk = message.mentions.users.first()
-  
+
   const kisi = db.fetch(`afkid_${message.author.id}_${message.guild.id}`)
-  
+
   const isim = db.fetch(`afkAd_${message.author.id}_${message.guild.id}`)
  if(afk){
    const sebep = db.fetch(`afkSebep_${afk.id}_${message.guild.id}`)
@@ -143,53 +143,10 @@ client.on("message" , async message => {
    db.delete(`afkSebep_${message.author.id}_${message.guild.id}`)
    db.delete(`afkid_${message.author.id}_${message.guild.id}`)
    db.delete(`afkAd_${message.author.id}_${message.guild.id}`)
-    message.member.setNickname(isim) 
-  }  
+    message.member.setNickname(isim)
+  }
 })
 
-//////////////////////// hg - hb
-client.on("guildMemberAdd", async member => {
-   const fs = require('fs');
-    const gözelkanal = member.guild.channels.get('680742696037777408')
-    if (!gözelkanal) return;
-     let username = member.user.username;
-        if (gözelkanal === undefined || gözelkanal === null) return;
-        if (gözelkanal.type === "text") {
-            const bg = await Jimp.read("https://cdn.discordapp.com/attachments/450693709076365323/473184528148725780/guildAdd.png");
-            const userimg = await Jimp.read(member.user.avatarURL);
-            var font;
-            if (member.user.tag.length < 15) font = await Jimp.loadFont(Jimp.FONT_SANS_128_WHITE);
-            else if (member.user.tag.length > 15) font = await Jimp.loadFont(Jimp.FONT_SANS_64_WHITE);
-            else font = await Jimp.loadFont(Jimp.FONT_SANS_32_WHITE);
-            await bg.print(font, 430, 170, member.user.tag);
-            await userimg.resize(362, 362);
-            await bg.composite(userimg, 43, 26).write("./img/"+ member.id + ".png");
-              setTimeout(function () {
-                    gözelkanal.send(new Discord.Attachment("./img/" + member.id + ".png"));
-              }, 1000);
-              setTimeout(function () {
-                fs.unlink("./img/" + member.id + ".png");
-              }, 10000);
-        }
-    })
-
-client.on("guildMemberRemove", async member => {
-   const fs = require('fs');
-    const gözelkanal = member.guild.channels.get('680742696037777408')
-        let username = member.user.username;
-        if (gözelkanal === undefined || gözelkanal === null) return;
-        if (gözelkanal.type === "text") {            
-                        const bg = await Jimp.read("https://cdn.discordapp.com/attachments/450693709076365323/473184546477572107/guildRemove.png");
-            const userimg = await Jimp.read(member.user.avatarURL);
-            var font;
-            if (member.user.tag.length < 15) font = await Jimp.loadFont(Jimp.FONT_SANS_128_WHITE);
-            else if (member.user.tag.length > 15) font = await Jimp.loadFont(Jimp.FONT_SANS_64_WHITE);
-            else font = await Jimp.loadFont(Jimp.FONT_SANS_32_WHITE);
-            await bg.print(font, 430, 170, member.user.tag);
-            await userimg.resize(362, 362);
-            await bg.composite(userimg, 43, 26).write("./img/"+ member.id + ".png");
-              setTimeout(function () {gözelkanal.send(new Discord.Attachment("./img/" + member.id + ".png"))}, 1000);
-              setTimeout(function () {fs.unlink("./img/" + member.id + ".png");}, 10000)}})
 //////////////////////// oto yönet
 client.on("guildMemberAdd", async (member) => {
   member.addRole("680741837748961305")
@@ -197,12 +154,13 @@ client.on("guildMemberAdd", async (member) => {
   client.channels.get("663099948648235038").send("> <a:kelebek2:685798195078627359> <@"+ member.id +"> Hoşgeldin <a:kelebek2:685798195078627359> <@&693952241031184415> \n> Lütfen Yetkililere isminizi ve yaşınızı belirtiniz <a:loading:685798148039245840>")});
 
 client.on('guildMemberRemove', async member => {
-member.guild.setName(`𝑭𝑭 𝑺𝒊𝑴𝑮𝑬 | ${member.guild.memberCount}`)});
+  member.guild.setName(`𝑭𝑭 𝑺𝒊𝑴𝑮𝑬 | ${member.guild.memberCount}`)
+  client.channels.get("663099948648235038").send("> <a:kelebek2:685798195078627359> <@"+ member.id +"> Sucudan ayrıldı... <a:kelebek2:685798195078627359>")});
 
 client.on("ready", () => {
   client.channels.get("664936598932160522").join();})
 
-//----------------------------------GEÇİCİ KANAL----------------------------// 
+//----------------------------------GEÇİCİ KANAL----------------------------//
 client.on('voiceStateUpdate', (oldMember, newMember) => {
     // todo create channel
     if (newMember.voiceChannel != null && newMember.voiceChannel.name.startsWith('➕ │ 2 Kişilik Oda Kur')) {
@@ -229,7 +187,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
         }
     }
 });
-//----------------------------------GEÇİCİ KANAL----------------------------// 
+//----------------------------------GEÇİCİ KANAL----------------------------//
 client.on('voiceStateUpdate', (oldMember, newMember) => {
     // todo create channel
     if (newMember.voiceChannel != null && newMember.voiceChannel.name.startsWith('➕ │ 3 Kişilik Oda Kur')) {
@@ -256,7 +214,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
         }
     }
 });
-//----------------------------------GEÇİCİ KANAL----------------------------// 
+//----------------------------------GEÇİCİ KANAL----------------------------//
 client.on('voiceStateUpdate', (oldMember, newMember) => {
     // todo create channel
     if (newMember.voiceChannel != null && newMember.voiceChannel.name.startsWith('➕ │ 4 Kişilik Oda Kur')) {
@@ -283,7 +241,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
         }
     }
 });
-//----------------------------------GEÇİCİ KANAL----------------------------// 
+//----------------------------------GEÇİCİ KANAL----------------------------//
 client.on('voiceStateUpdate', (oldMember, newMember) => {
     // todo create channel
     if (newMember.voiceChannel != null && newMember.voiceChannel.name.startsWith('➕ │ 5 Kişilik Oda Kur')) {
@@ -315,7 +273,7 @@ client.on('message', (msg) => {
   const c = msg.content.toLowerCase()
   if(c=='sa'||c=='sea'||c=='selamun aleyküm'||c=='selam'){
   return msg.reply('Aleyküm Selam, Hoş Geldin. Naber?')};
-  
+
   if (c=='naber'){
   return msg.reply('İyidir senden Naber')};
 
