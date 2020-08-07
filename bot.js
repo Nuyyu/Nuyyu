@@ -151,11 +151,11 @@ client.on("message" , async message => {
 client.on("guildMemberAdd", async (member) => {
   member.addRole("680741837748961305")
   member.guild.setName(`𝑭𝑭 𝑺𝒊𝑴𝑮𝑬 | ${member.guild.memberCount}`)
-  client.channels.get("663099948648235038").send("> <a:kelebek2:685798195078627359> <@"+ member.id +"> Hoşgeldin <a:kelebek2:685798195078627359> <@&693952241031184415> \n> Lütfen Yetkililere isminizi ve yaşınızı belirtiniz <a:loading:685798148039245840>")});
+  client.channels.get("663099948648235038").send("> <a:parti:681136269056933949> <@"+ member.id +"> Hoşgeldin <a:parti:681136269056933949> <@&693952241031184415> \n> Lütfen Yetkililere isminizi ve yaşınızı belirtiniz <a:loading:685798148039245840>")});
 
 client.on('guildMemberRemove', async member => {
   member.guild.setName(`𝑭𝑭 𝑺𝒊𝑴𝑮𝑬 | ${member.guild.memberCount}`)
-  client.channels.get("663099948648235038").send("> <a:kelebek2:685798195078627359> <@"+ member.id +"> Sucudan ayrıldı... <a:kelebek2:685798195078627359>")});
+  client.channels.get("663099948648235038").send("> <a:parti:681136269056933949> <@"+ member.id +"> Sucudan ayrıldı... <a:parti:681136269056933949>")});
 
 client.on("ready", () => {
   client.channels.get("664936598932160522").join();})
