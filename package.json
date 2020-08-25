@@ -1,8 +1,13 @@
 {
-  "name": "darkalone",
+  "name": "SMG",
   "version": "1.0.0",
-  "description": "Sunucuya özel bot",
+  "author": "Nurullah A.",
+
+  "license": "MIT",
   "main": "bot.js",
+  "description": "Sunucuya özel bot",
+  "engines": { "node": "12.16.2" },
+
   "dependencies": {
     "discord.js": "^12.2.0",
     "quick.db": "^7.1.1",
@@ -16,14 +21,10 @@
     "parse-ms": "^2.0.0",
     "discord-temp-channels": "^1.0.3"
   },
-  "engines": {
-    "node": "12.16.2"
-  },
-  "devDependencies": {},
+
   "scripts": {
     "heroku-postbuild": "echo Yüklendi ve Temizlendi.",
     "start": "node bot.js"
   },
-  "author": "Nurullah A.",
-  "license": "MIT"
+
 }
