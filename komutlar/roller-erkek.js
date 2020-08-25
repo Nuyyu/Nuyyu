@@ -1,61 +1,34 @@
-const Discord = require("discord.js");
+const Discord = require('discord.js');
+const db = require('quick.db');
 
-exports.run = async (client, message, args, ops) => {
-  message.react("a:dogru:664439029135310849");
-  if (!message.member.roles.find("id", "693952241031184415")) {
-    return message
-      .reply("<a:uyari:659786593862680580>  **Yeterli Yetkiye Sahip Değilsin**")
-      .then(m => m.delete(10000));
-  }
-  let Hedef = message.guild.member(
-    message.mentions.users.first() || message.guild.members.get(args[0])
-  );
-  if (!Hedef) return message.channel.send("Bir kullanıcı girin.");
+exports.run = async (client, msg, args) => {
+  let nick = args[1]; let nick2 = args[2];
+  let hedef = msg.guild.member(msg.mentions.users.first() || msg.guild.members.cache.get(args[0]));
+  if (!nick) return msg.reply(`${client.emoji.hata} İsimsiz olamaz ya?`);
+  if (!hedef) return msg.reply(`${client.emoji.hata} Bir kullanıcı girmeyi unuttun!`);
 
-  await Hedef.addRole("680421279236489219");
-  await Hedef.removeRole("680741837748961305");
-  const nick = args[1];
-  const yas = args[2];
-  message.guild.member(Hedef).setNickname(`FF | ${nick} | ${yas}`);
+  await hedef.roles.add('630506411650187284');
+  await hedef.roles.remove('618218320642179083');
+  await hedef.setNickname(`↯ ${nick}`)
+  await db.add(`teyit.erkek.${msg.author.id}.${msg.guild.id}`, 1)
 
-  let baglanti1 = new Discord.RichEmbed()
-    .setTitle(
-      "<a:dogru:664439029135310849> <a:gir:664439299877371909> Yeniden Aramıza Hoş Geldin Kral <a:gir:664439299877371909> <a:dogru:664439029135310849>"
-    )
-    .setColor("#00ffff")
-    .setDescription(
-      "<a:hypesquad:664765634906816512> " +
-        Hedef +
-        " Sunucuya Renk kattığın için teşekkürler <a:hypesquad:664765634906816512>\n<a:elmas:669054308733550593> <#678701843425001495> Kuralları Okumadan geçme <a:elmas:669054308733550593>\n<a:kelebek2:664761941381611540> Senden daha karizmatik görmedim, bu dünyada <a:kelebek2:664761941381611540>"
-    )
-    .setThumbnail(message.guild.iconURL);
-  let baglanti2 = new Discord.RichEmbed()
-    .setTitle(
-      "<a:dia:669054299539505152>  Yeni Erkek Kullanıcı Kaydı  <a:dia:669054299539505152>"
-    )
-    .setColor("#00ffff")
-    .addField(
-      "<a:kalplineon:664765671674216450> Kullanıcı <a:kalplineon:664765671674216450>",
-      `${Hedef}`,
-      true
-    )
-    .addField(
-      "<a:hypesquad:664765792285622312> Yetkili <a:hypesquad:664765792285622312>",
-      `${message.author}`,
-      true
-    )
-    .setThumbnail(message.guild.iconURL);
-  let Kanal1 = message.guild.channels.find(`id`, "663099927777247246");
+  const onay = new Discord.MessageEmbed()
+    .setTitle('<a:dia:669054299539505152>  Yeni Kayıt oluşturuldu  <a:dia:669054299539505152>')
+    .addField('<a:kalplineon:664765671674216450> Kullanıcı <a:kalplineon:664765671674216450>', hedef, true)
+    .addField('<a:hypesquad:664765792285622312> Yetkili <a:hypesquad:664765792285622312>', msg.author, true)
+    .setColor(client.ayar.erkek).setThumbnail(client.ayar.logo)
+  client.webhook.kayit.send({username: msg.author.username, avatarURL: msg.author.avatarURL(), embeds: [onay]});
 
-  Kanal1.send(baglanti1);
-  return message.channel.send(baglanti2);
-};
+  {if (nick2) return hedef.setNickname(`↯ ${nick} ${nick2}`)};
+  {if (!hedef.roles.cache.has('618218320642179083')) {hedef.roles.remove('674611334981222411')}}};
 
-exports.conf = {
-  enabled: true,
-  aliases: ["e", "bay", "men"]
-};
-
-exports.help = {
-  name: "erkek"
-};
+exports.ayar = {
+  komut: 'erkek',
+  aktif: true,
+  sunucu: true,
+  yetki: 1,
+  yan: ['e','men','bay','boy','bey'],
+  kategori: 'Yetkili',
+  kullan: 'b [@etiket] [isim] (2.isim)',
+  bilgi: 'Etiketlediğiniz Kullınıcıyı ismini düzenleyip kayıt eder '
+}

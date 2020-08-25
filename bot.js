@@ -1,300 +1,239 @@
-const express = require('express');
-const http = require('http');
-const app = express();
-app.get("/", (request, response) => {
-  console.log(Date.now() + " Ping tamamdır.");
-  response.sendStatus(200);
-});
-app.listen(process.env.PORT);
-setInterval(() => {
-  http.get(`http://ffsimge.herokuapp.com/`);
-}, 180000);
+const Discord = require("discord.js"); const client = new Discord.Client();
+const moment = require("moment"); require("moment-duration-format");
+const express = require("express"); const http = require("http");
+const ms = require("parse-ms"); const chalk = require('chalk');
+const db = require("quick.db"); const fs = require("fs");
+const TempChannels = require("discord-temp-channels");
+const tempChannels = new TempChannels(client);
+const app = express(); moment.locale("tr");
 
-const Discord = require('discord.js');
-const client = new Discord.Client();
-const ayarlar = require('./ayarlar.json');
-const fs = require('fs');
-const moment = require('moment');
-const db = require('quick.db');
-const chalk = require('chalk');
-const Jimp = require('jimp');
-require('./util/eventLoader')(client);
-var prefix = ayarlar.prefix;
-
-const log = message => {
-  console.log(`[${moment().format('YYYY-MM-DD HH:mm:ss')}] ${message}`);
+client.ayar = {
+	prefix: '!',
+  ismi: 'FF Simge',
+  logo: `https://media.discordapp.net/attachments/663099927777247246/747761242550042644/PicsArt_08-25-10.49.13.jpg`,
+  sahip: '654249589460697098',
+  sunucu: '663049798470991894',
+  tag: '§',
+  hata: 'RED',
+  oldu: 'GRENN',
+	klasik: '2F3136',
+	erkek: '6dd0e5',
+	bayan: 'eead0e',
+	denetim: '668389364291862528',
 };
 
+client.rol = {
+	erkek: '680421279236489219',
+	bayan: '680421088064569362',
+	kayit: '680741837748961305',a
+	sesiz: '681102788662394880',
+	hapis: '693950335030394881',
+  boost: '687688305172676656',
+	yetkili: '747762177028653106',
+};
+
+client.emoji = {
+  su: '<a:su:735813602946187314>',
+	eko: '<a:eko:741278528388988941>',
+	tac: '<a:tac:734859606853156955>',
+	ayar: '<a:yar:734473658411516025>',
+	nana: '<a:nana:689114728383119610>',
+  tag: '<a:datag:721292102297845772>',
+	idam: '<a:idam:664439451585609728>',
+	uyar: '<a:uyar:664761926907199488>',
+	gold: '<a:gold:734474984994635918>',
+	onay: '<a:dogru:664439029135310849>',
+	hata: '<a:hatan:632734448982425610>',
+	onay: '<a:dogru:664439029135310849>',
+	elmas: '<a:elmas:669054308733550593>',
+	insta: '<a:insta:720957324507742270>',
+  stres: '<a:stres:689114713820364813>',
+	dogru: '<a:dogru:664439029135310849>',
+	kitap: '<a:kitap:734473348037214258>',
+	tamir: '<a:tamir:664439158797762560>',
+	boost: '<a:boost:689114801162682377>',
+	ileri: '<a:ileri:664439337076654100>',
+	parti: '<a:parti:681136269056933949>',
+	parla: '<a:parla:720956459172495401>',
+	insta: '<a:dokuz:720957324507742270>',
+	ileri: '<a:ileri:664439337076654100>',
+	yildiz: '<a:yildiz:689115349496627249>',
+	dokuzgen: '<a:9gen:689115349496627249>',
+	hayran: '<a:hayran:720956211864010792>',
+	kelebek: '<a:kelebek:734875493907562518>',
+	loading: '<a:loading:664439215056093195>',
+	bildirim: '<a:bildirim:664765701441191959>',
+	KalpSiyah: '<a:KalpSiyah:689114490599374866>',
+	KalpAtisi: '<a:KalpAtisi:666985251498885152>',
+	hypesquad: '<a:hypesquad:664765792285622312>',
+	sonsuzluk: '<a:sonsuzluk:664439381272297472>',
+	sifir: '<a:sifir:730893122292285551>',
+  bir: '<a:bir:730893136272031745>',
+  iki: '<a:iki:730893149823565864>',
+  uc: '<a:uc:730893193402515567>',
+  dort: '<a:dort:730893198360051802>',
+  bes: '<a:bes:730893213971382354>',
+	yedi: '<a:yedi:730893240345296997>',
+  alti: '<a:alti:730893226755489812>',
+  sekiz: '<a:sekiz:730893250671673395>',
+  dokuz: '<a:dokuz:730893262415593535>',
+};
+
+//━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\\ Komut & Event & Yetkiler //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\\
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
-fs.readdir('./komutlar/', (err, files) => {
-  if (err) console.error(err);
-  log(`${files.length} komut yüklenecek.`);
-  files.forEach(f => {
-    let props = require(`./komutlar/${f}`);
-    log(`Yüklenen komut: ${props.help.name}.`);
-    client.commands.set(props.help.name, props);
-    props.conf.aliases.forEach(alias => {
-      client.aliases.set(alias, props.help.name);
-    });
-  });
-});
 
-client.reload = command => {
-  return new Promise((resolve, reject) => {
-    try {
-      delete require.cache[require.resolve(`./komutlar/${command}`)];
-      let cmd = require(`./komutlar/${command}`);
-      client.commands.delete(command);
-      client.aliases.forEach((cmd, alias) => {
-        if (cmd === command) client.aliases.delete(alias);
-      });
-      client.commands.set(command, cmd);
-      cmd.conf.aliases.forEach(alias => {
-        client.aliases.set(alias, cmd.help.name);
-      });
-      resolve();
-    } catch (e){
-      reject(e);
-    }
-  });
-};
+fs.readdir("./komutlar/", (err, files) => {
+  console.log(`📁 Toplam ${files.length} Komut bulunuyor 📁`);
+  if (err) return console.error(err);
+  files.forEach((file) => {
+    if (!file.endsWith(".js")) return;
+    let cmd = require(`./komutlar/${file}`);
+    let cmdFileName = file.split(".")[0];
+    client.commands.set(cmd.ayar.komut, cmd);
+    console.log(`📁 Komut 📁 ${cmdFileName}`);
+    if (cmd.ayar.yan) {
+      cmd.ayar.yan.forEach(alias => {
+      client.aliases.set(alias, cmd.ayar.komut)})}})});
 
-client.load = command => {
-  return new Promise((resolve, reject) => {
-    try {
-      let cmd = require(`./komutlar/${command}`);
-      client.commands.set(command, cmd);
-      cmd.conf.aliases.forEach(alias => {
-        client.aliases.set(alias, cmd.help.name);
-      });
-      resolve();
-    } catch (e){
-      reject(e);
-    }
-  });
-};
+fs.readdir("./etkinlikler/", (err, files) => {
+  console.log(`🎉 Toplam ${files.length} Etkinlik bulunuyor 🎉`);
+  if (err) return console.error(err);
+  files.forEach((file) => {
+    const event = require(`./etkinlikler/${file}`);
+    let eventName = file.split(".")[0];
+    console.log(`🎉 Etkinlik 🎉 ${eventName}`);
+    client.on(eventName, event.bind(null, client))})});
 
-client.unload = command => {
-  return new Promise((resolve, reject) => {
-    try {
-      delete require.cache[require.resolve(`./komutlar/${command}`)];
-      let cmd = require(`./komutlar/${command}`);
-      client.commands.delete(command);
-      client.aliases.forEach((cmd, alias) => {
-        if (cmd === command) client.aliases.delete(alias);
-      });
-      resolve();
-    } catch (e){
-      reject(e);
-    }
-  });
-};
+client.elevation = message => {if (!message.guild) {return}
+  let yetki = 0;
+  if (message.member.hasPermission("MANAGE_MESSAGES")) yetki = 1;
+  if (message.member.hasPermission("VIEW_AUDIT_LOG")) yetki = 2;
+  if (message.member.hasPermission("BAN_MEMBERS")) yetki = 3;
+  if (message.author.id === client.ayar.sahip) yetki = 4;
+  return yetki};
+
 var regToken = /[\w\d]{24}\.[\w\d]{6}\.[\w\d-_]{27}/g;
-client.on('warn', e => {
-  console.log(chalk.bgYellow(e.replace(regToken, 'that was redacted')));
-});
-client.on('error', e => {
-  console.log(chalk.bgRed(e.replace(regToken, 'that was redacted')));
-});
+client.login(process.env.token); console.log(`(◔◡◔) Nurullah A. (◔_◔)`);
+client.on('error', e => {console.log(chalk.bgRed(e.replace(regToken, 'that was redacted')))});
+client.on('warn', e => {console.log(chalk.bgYellow(e.replace(regToken, 'that was redacted')))});
+app.listen(process.env.PORT); setInterval(() => {http.get(`http://ffsimge.herokuapp.com`)}, 15000);
+app.get("/", (request, response) => {response.sendStatus(200)});
 
-//////////////////////// Yetkiler ////////////////////////
-client.elevation = message => {
-  if(!message.guild) {
-	return; }
-  let permlvl = 0;
-  if (message.member.hasPermission("MANAGE_MESSAGES")) permlvl = 1;
-  if (message.member.hasPermission("BAN_MEMBERS")) permlvl = 2;
-  if (message.member.hasPermission("MANAGE_GUILD")) permlvl = 3;
-  if (message.author.id === ayarlar.sahip) permlvl = 4;
-  return permlvl;
-};
+client.on("message", async msg => {
+if (msg.author.bot) return;
+const msgArr = msg.content.split(/\s+/g);
+const commands = msgArr[0];
+const command = commands.toLowerCase();
+const args = msgArr.slice(1);
+let yetki = client.elevation(msg);
 
-//////////////////////// afk ////////////////////////
-client.on("message" , async message => {
-  const msg = message;
-  if(message.content.startsWith(ayarlar.prefix+"afk")) return;
-  let afk = message.mentions.users.first()
+if (!command.startsWith(client.ayar.prefix)) return;
+let cmd = client.commands.get(command.slice(client.ayar.prefix.length)) ||
+client.commands.get(client.aliases.get(command.slice(client.ayar.prefix.length)));
+if (!cmd) return; if (cmd.ayar.sunucu && msg.channel.type == "dm") return;
 
-  const kisi = db.fetch(`afkid_${message.author.id}_${message.guild.id}`)
+if (!cmd) return
+if (cmd) {
+  var uyari = new Discord.MessageEmbed()
+    .setAuthor(msg.author.username +" Uyarı", msg.author.avatarURL())
+    .setThumbnail(client.ayar.logo).setColor('RED');
 
-  const isim = db.fetch(`afkAd_${message.author.id}_${message.guild.id}`)
- if(afk){
-   const sebep = db.fetch(`afkSebep_${afk.id}_${message.guild.id}`)
-   const kisi3 = db.fetch(`afkid_${afk.id}_${message.guild.id}`)
-   if(message.content.includes(kisi3)){
-     const embed = new Discord.RichEmbed()
-      .setColor("#0080FF")
-      .setAuthor("FF Simge" , "https://cdn.discordapp.com/avatars/605781334438445057/495a33da25bc54f9c9dd1f5883da7409.png")
-      .setDescription(`Etiketlediğiniz Kişi Afk \n Sebep : ${sebep}`)
-      .setTimestamp()
-      .setFooter(`${message.author.username} Tarafından İstendi`)
-       message.channel.send(embed)
-   }
- }
-  if(message.author.id === kisi){
-    const embed = new Discord.RichEmbed()
-      .setColor("#0080FF")
-      .setAuthor("FF Simge" , "https://cdn.discordapp.com/avatars/605781334438445057/495a33da25bc54f9c9dd1f5883da7409.png")
-      .setDescription(`Afk'lıktan Çıktınız`)
-      .setTimestamp()
-      .setFooter(`${message.author.username} Tarafından İstendi`)
-       message.channel.send(embed)
-   db.delete(`afkSebep_${message.author.id}_${message.guild.id}`)
-   db.delete(`afkid_${message.author.id}_${message.guild.id}`)
-   db.delete(`afkAd_${message.author.id}_${message.guild.id}`)
-    message.member.setNickname(isim)
-  }
-})
+  const bakim = db.fetch(`bakim.${client.user.id}`); if (bakim){ if (msg.author.id !== '402369381012865025') {
+  msg.channel.send(`${command} isimli komut şu anda bakımdadır.`); return }}
 
-//////////////////////// oto yönet
-client.on("guildMemberAdd", async (member) => {
-  member.addRole("680741837748961305")
-  member.guild.setName(`𝑭𝑭 𝑺𝒊𝑴𝑮𝑬 | ${member.guild.memberCount}`)
-  client.channels.get("663099948648235038").send("> <a:parti:681136269056933949> <@"+ member.id +"> Hoşgeldin <a:parti:681136269056933949> <@&693952241031184415> \n> Lütfen Yetkililere isminizi ve yaşınızı belirtiniz <a:loading:685798148039245840>")});
+  if (cmd.ayar.aktif === false){ if (!client.ayar.sahip.includes(msg.author.id) && !client.ayar.sahip.includes(msg.author.id)) {
+  msg.channel.send(uyari.setDescription(`**${command}** komut geçici olarak kullanıma kapalıdır!`)); return}}
 
-client.on('guildMemberRemove', async member => {
-  member.guild.setName(`𝑭𝑭 𝑺𝒊𝑴𝑮𝑬 | ${member.guild.memberCount}`)
-  client.channels.get("663099948648235038").send("> <a:parti:681136269056933949> <@"+ member.id +"> Sucudan ayrıldı... <a:parti:681136269056933949>")});
+  if (cmd.ayar.yetki === 1){ if (!msg.member.hasPermission("MANAGE_MESSAGES")) {
+	msg.channel.send(uyari.setDescription(`Bunu yapbilmek için **Yetkili** olmalısın!`)); return}}
 
-client.on("ready", () => {
-  client.channels.get("664936598932160522").join();})
+  if (cmd.ayar.yetki === 2){ if (!msg.member.hasPermission("KICK_MEMBERS")) {
+  msg.channel.send(uyari.setDescription(`Bunu yapbilmek için **Yetkili** olmalısın!`)); return}}
 
-//----------------------------------GEÇİCİ KANAL----------------------------//
-client.on('voiceStateUpdate', (oldMember, newMember) => {
-    // todo create channel
-    if (newMember.voiceChannel != null && newMember.voiceChannel.name.startsWith('➕ │ 2 Kişilik Oda Kur')) {
-        newMember.guild.createChannel(`║ ${newMember.displayName}`, {
-            type: 'voice',
-            parent: newMember.voiceChannel.parent
-       }).then(cloneChannel => {
-        newMember.setVoiceChannel(cloneChannel)
-        cloneChannel.setUserLimit(2)
-      })
-    }
-    // ! leave
-    if (oldMember.voiceChannel != undefined) {
-        if (oldMember.voiceChannel.name.startsWith('║ ')) {
-            if (oldMember.voiceChannel.members.size == 0) {
-                oldMember.voiceChannel.delete()
-            }
-            else { // change name
-                let matchMember = oldMember.voiceChannel.members.find(x => `║ ${x.displayName}` == oldMember.voiceChannel.name);
-                if (matchMember == null) {
-                    oldMember.voiceChannel.setName(`║ ${oldMember.voiceChannel.members.random().displayName}`)
-                }
-            }
-        }
-    }
-});
-//----------------------------------GEÇİCİ KANAL----------------------------//
-client.on('voiceStateUpdate', (oldMember, newMember) => {
-    // todo create channel
-    if (newMember.voiceChannel != null && newMember.voiceChannel.name.startsWith('➕ │ 3 Kişilik Oda Kur')) {
-        newMember.guild.createChannel(`║ ${newMember.displayName}`, {
-            type: 'voice',
-            parent: newMember.voiceChannel.parent
-       }).then(cloneChannel => {
-        newMember.setVoiceChannel(cloneChannel)
-        cloneChannel.setUserLimit(3)
-      })
-    }
-    // ! leave
-    if (oldMember.voiceChannel != undefined) {
-        if (oldMember.voiceChannel.name.startsWith('║ ')) {
-            if (oldMember.voiceChannel.members.size == 0) {
-                oldMember.voiceChannel.delete()
-            }
-            else { // change name
-                let matchMember = oldMember.voiceChannel.members.find(x => `║ ${x.displayName}` == oldMember.voiceChannel.name);
-                if (matchMember == null) {
-                    oldMember.voiceChannel.setName(`║ ${oldMember.voiceChannel.members.random().displayName}`)
-                }
-            }
-        }
-    }
-});
-//----------------------------------GEÇİCİ KANAL----------------------------//
-client.on('voiceStateUpdate', (oldMember, newMember) => {
-    // todo create channel
-    if (newMember.voiceChannel != null && newMember.voiceChannel.name.startsWith('➕ │ 4 Kişilik Oda Kur')) {
-        newMember.guild.createChannel(`║ ${newMember.displayName}`, {
-            type: 'voice',
-            parent: newMember.voiceChannel.parent
-       }).then(cloneChannel => {
-        newMember.setVoiceChannel(cloneChannel)
-        cloneChannel.setUserLimit(4)
-      })
-    }
-    // ! leave
-    if (oldMember.voiceChannel != undefined) {
-        if (oldMember.voiceChannel.name.startsWith('║ ')) {
-            if (oldMember.voiceChannel.members.size == 0) {
-                oldMember.voiceChannel.delete()
-            }
-            else { // change name
-                let matchMember = oldMember.voiceChannel.members.find(x => `║ ${x.displayName}` == oldMember.voiceChannel.name);
-                if (matchMember == null) {
-                    oldMember.voiceChannel.setName(`║ ${oldMember.voiceChannel.members.random().displayName}`)
-                }
-            }
-        }
-    }
-});
-//----------------------------------GEÇİCİ KANAL----------------------------//
-client.on('voiceStateUpdate', (oldMember, newMember) => {
-    // todo create channel
-    if (newMember.voiceChannel != null && newMember.voiceChannel.name.startsWith('➕ │ 5 Kişilik Oda Kur')) {
-        newMember.guild.createChannel(`║ ${newMember.displayName}`, {
-            type: 'voice',
-            parent: newMember.voiceChannel.parent
-       }).then(cloneChannel => {
-        newMember.setVoiceChannel(cloneChannel)
-        cloneChannel.setUserLimit(5)
-      })
-    }
-    // ! leave
-    if (oldMember.voiceChannel != undefined) {
-        if (oldMember.voiceChannel.name.startsWith('║ ')) {
-            if (oldMember.voiceChannel.members.size == 0) {
-                oldMember.voiceChannel.delete()
-            }
-            else { // change name
-                let matchMember = oldMember.voiceChannel.members.find(x => `║ ${x.displayName}` == oldMember.voiceChannel.name);
-                if (matchMember == null) {
-                    oldMember.voiceChannel.setName(`║ ${oldMember.voiceChannel.members.random().displayName}`)
-                }
-            }
-        }
-    }
+  if (cmd.ayar.yetki === 3){ if (!msg.member.hasPermission("BAN_MEMBERS")) {
+  msg.channel.send(uyari.setDescription(`Bu komutu kullanabilmek için **Üyeleri At** iznine sahip olmalısın!`)); return }}
+
+  if (cmd.ayar.yetki === 4){ if (!msg.member.hasPermission("ADMINISTRATOR")) {
+  msg.channel.send(uyari.setDescription(`Bu komutu kullanabilmek için **Üyeleri At** iznine sahip olmalısın!`)); return}}
+
+  if (cmd.ayar.yetki === 5){ if (!client.ayar.sahip.includes(msg.author.id)) {
+  msg.channel.send(uyari.setDescription(`Bu komutu kullanabilmek için **Sahibi** olmalısın!`)); return }}
+
+if (cmd) {if (yetki < cmd.ayar.yetki) return;
+if (cmd) cmd.run(client, msg, args, yetki)}}});
+
+//━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\\ AFK //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\\
+client.on("message", async msg => {
+  if(msg.author.bot) return;
+  if(!msg.guild) return;
+  if(msg.content.includes(client.ayar.prefix+"afk")) return;
+  const isim = db.fetch(`afkAd.${msg.author.id}`)
+  const afk = new Discord.MessageEmbed().setColor("RANDOM")
+
+  if(await db.fetch(`afk.${msg.author.id}`)) {
+    msg.channel.send(afk
+      .setDescription(`${client.emoji.uyar} Afk'lıktan Çıktınız`)
+      .setAuthor(msg.author.username)
+      .setThumbnail(msg.author.avatarURL()))
+    db.delete(`afk.${msg.author.id}`);
+    db.delete(`afk.süre_${msg.author.id}`);
+    msg.member.setNickname(isim)
+    db.delete(`afkAd.${msg.author.id}`)}
+
+  var USER = msg.mentions.users.first(); if(!USER) return;
+  var REASON = db.fetch(`afk.${USER.id}`);
+
+  if(REASON) {
+    let süre = await db.fetch(`afk.süre.${USER.id}`);
+    let timeObj = ms(Date.now() - süre);
+    msg.channel.send(afk
+    .setAuthor(USER.username + " AFK")
+    .setThumbnail(USER.avatarURL())
+    .addField(`${client.emoji.nana} **Süre:** ${client.emoji.nana}`, `${timeObj.hours} Saat ${timeObj.minutes} Dakika ${timeObj.seconds} Saniye`)
+    .addField(`${client.emoji.eko} **Sebep:** ${client.emoji.eko}`, REASON).setFooter(msg.author.username, msg.author.avatarURL()))}});
+
+//━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\\ Diğerleri //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\\
+client.on("guildMemberAdd", async member => {
+  if (member.user.bot) {member.kick()};
+  if (member.roles.cache.get('693950335030394881')) return; if (member.roles.cache.get('681102788662394880')) return;
+
+  let zaman = new Date().getTime() - member.user.createdAt.getTime(); var takizaman = [];
+  if (zaman < 604800000) {takizaman = `${client.emoji.uyar} \`\Kanında Enfeksiyon Bulundu, Tehlikeli!\`\ ${client.emoji.uyar}`
+  } else {takizaman = `${client.emoji.dogru} \`\Kanı Temiz, Gizli Krallığa Uygun!\`\ ${client.emoji.dogru}`}
+  const gecen = moment.duration(zaman).format("`Y [Yıl,] D [Gün,] H [Saat,] m [Dakika]`")
+  const vakit = moment(member.user.createdAt).format("`h:mm:ss  D MMMM Y W [Oluşmuş]`")
+
+  var hg = new Discord.MessageEmbed()
+    .setAuthor(member.user.username, member.user.avatarURL())
+    .setThumbnail(member.user.avatarURL()).setColor('RANDOM')
+    .setDescription(`${client.emoji.elmas} **Hoş Geldin!** Seninle Beraber **${member.guild.memberCount}** Kişiyiz ${client.emoji.elmas}\n${client.emoji.eko} ${vakit} ${client.emoji.eko}\n${client.emoji.hypesquad} ${gecen} ${client.emoji.hypesquad}\n${takizaman}\n${client.emoji.bildirim} Kayıt için Yetkilileri Etiketlemen Yeterli ${client.emoji.bildirim}\n${client.emoji.ileri} Önemli Bilgileri Dm'e Bıraktık \`\!yardım\`\ ${client.emoji.ileri}\n${client.emoji.idam} Ölüm ile Yaşam Arasında ki Çizgiyi Takip Et ${client.emoji.idam}`)
+    .setThumbnail(client.ayar.logo)
+
+  await client.channels.cache.get('663099948648235038').send(`||${client.emoji.elmas}  ${member}  <@&639523200232849408>  ${client.emoji.elmas}||`, {username: member.user.username, avatarURL: member.user.avatarURL(), embeds: [hg]});
+
+  await member.setNickname(`§ | ${member.user.username} | Yaş`);
+  await member.guild.setName(`𝑭𝑭 𝑺𝒊𝑴𝑮𝑬 | ${member.guild.memberCount}`);
+
+  {if (!member.roles.cache.get('680741837748961305')) {member.roles.add('680741837748961305')}};
+  {if (zaman < 604800000) member.roles.add("747763109351129168")};
+  {if (!tumHarfler('a', 'z').some(harf => member.user.username.split("").includes(harf))) {member.setNickname("§ | Yasaklı Karakter")
+    } else {return} function tumHarfler(charA, charZ) {let a = [], i = charA.charCodeAt(0), j = charZ.charCodeAt(0);
+    for (; i <= j; ++i) {a.push(String.fromCharCode(i))} return a}}
 });
 
-client.on('message', (msg) => {
-  const c = msg.content.toLowerCase()
-  if(c=='sa'||c=='sea'||c=='selamun aleyküm'||c=='selam'){
-  return msg.reply('Aleyküm Selam, Hoş Geldin. Naber?')};
-
-  if (c=='naber'){
-  return msg.reply('İyidir senden Naber')};
-
-  if (c== 'güle güle'){
-  return msg.reply('sana da güle güle')};
-
-  if (c== '<@!654249589460697098>'){
-  return msg.channel.send("Mekanın sahibi olan ablanızı mı Çağırmak istediniz")};
-
-  if (c== '<@!664547930987823156>'){
-  return msg.channel.send("Zeynoş Simgenin Sağ kolu olan")}});
+client.on("guildMemberRemove", (member) => {
+  member.guild.setName(`𝑭𝑭 𝑺𝒊𝑴𝑮𝑬 | ${member.guild.memberCount}`)})
 
 client.on('messageDelete', async msg => {
+	var k = msg.channel.id
   if (msg.author.bot) return; if (msg.channel.type === "dm") return;
-  var silindi = new Discord.RichEmbed()
+	if (k === '729719649499086888') return;
+	var silindi = new Discord.MessageEmbed()
   .addField("**Kullanıcı:**", msg.author.tag, true)
   .addField("**Kullanıcı ID:**", msg.author.id, true)
   .addField("**Kanal:**", msg.channel.name, true)
   .addField("**Silinen Mesaj:**","```"+ msg.content +"```")
-  .setFooter(msg.guild.name+`  •  Bir Mesaj Silindi!`)
-  .setColor('RANDOM').setThumbnail(msg.author.avatarURL).setTimestamp()
-  await client.channels.get('668389364291862528').send(silindi)});
-
-client.login(ayarlar.token);
+  .setFooter(msg.guild.name+`  •  Bir Mesaj Silindi!`,`${client.ayar.logo}`)
+	.setColor('RANDOM').setThumbnail(msg.author.avatarURL()).setTimestamp()
+  await client.channels.cache.get('668389364291862528').send(silindi)});
