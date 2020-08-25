@@ -247,7 +247,7 @@ tempChannels.registerChannel("693928588956794934", {
 
 tempChannels.registerChannel("693928587400577095", {
   childCategory: "747866638900134004",
-  childAutoDelete: false,
+  childAutoDelete: true,
   childMaxUsers: 2,
   childFormat: (member, count) => `#${count} | ${member.user.username} Odası`
 });
