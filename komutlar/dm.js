@@ -8,7 +8,7 @@ exports.run = (client, msg, args) => {
 
   var embed = new Discord.MessageEmbed()
   .setColor('RANDOM')
-  .setTitle(`**Sahibimden Bir Mesajın Var**`)
+  .setTitle(`**Simgeden Mesajın Var**`)
   .setTimestamp()
   .setDescription(reason);
   return user.send(embed)};

@@ -237,3 +237,31 @@ client.on('messageDelete', async msg => {
   .setFooter(msg.guild.name+`  •  Bir Mesaj Silindi!`,`${client.ayar.logo}`)
 	.setColor('RANDOM').setThumbnail(msg.author.avatarURL()).setTimestamp()
   await client.channels.cache.get('668389364291862528').send(silindi)});
+
+tempChannels.registerChannel("693928588956794934", {
+  childCategory: "747866638900134004",
+  childAutoDeleteIfEmpty: true,
+  childMaxUsers: 1,
+  childFormat: (member, count) => `#${count} | ${member.user.username} Odası`
+});
+
+tempChannels.registerChannel("693928587400577095", {
+  childCategory: "747866638900134004",
+  childAutoDeleteIfEmpty: true,
+  childMaxUsers: 2,
+  childFormat: (member, count) => `#${count} | ${member.user.username} Odası`
+});
+
+tempChannels.registerChannel("693928587883184139", {
+  childCategory: "747866638900134004",
+  childAutoDeleteIfEmpty: true,
+  childMaxUsers: 3,
+  childFormat: (member, count) => `#${count} | ${member.user.username} Odası`
+});
+
+tempChannels.registerChannel("693928588176785539", {
+  childCategory: "747866638900134004",
+  childAutoDeleteIfEmpty: true,
+  childMaxUsers: 4,
+  childFormat: (member, count) => `#${count} | ${member.user.username} Odası`
+});

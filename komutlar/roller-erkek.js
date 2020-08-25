@@ -17,9 +17,8 @@ exports.run = async (client, msg, args) => {
     .addField('<a:kalplineon:664765671674216450> Kullanıcı <a:kalplineon:664765671674216450>', hedef, true)
     .addField('<a:hypesquad:664765792285622312> Yetkili <a:hypesquad:664765792285622312>', msg.author, true)
     .setColor(client.ayar.erkek).setThumbnail(client.ayar.logo)
-  client.webhook.kayit.send({username: msg.author.username, avatarURL: msg.author.avatarURL(), embeds: [onay]});
+  await msg.channels.send(onay);
 
-  {if (nick2) return hedef.setNickname(`↯ ${nick} ${nick2}`)};
   {if (!hedef.roles.cache.has('618218320642179083')) {hedef.roles.remove('674611334981222411')}}};
 
 exports.ayar = {

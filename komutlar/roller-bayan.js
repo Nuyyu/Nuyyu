@@ -7,9 +7,9 @@ exports.run = async (client, msg, args) => {
   if (!nick) return msg.reply(`${client.emoji.hata} İsimsiz olamaz ya?`);
   if (!hedef) return msg.reply(`${client.emoji.hata} Bir kullanıcı girmeyi unuttun!`);
 
-  await hedef.roles.add('596010961190780988');
-  await hedef.roles.remove('618218320642179083');
-  await hedef.setNickname(`↯ ${nick}`)
+  await hedef.roles.add('680421088064569362');
+  await hedef.roles.remove('680741837748961305');
+  await hedef.setNickname(`FF ${nick} ${nick2}`)
   await db.add(`teyit.bayan.${msg.author.id}.${msg.guild.id}`, 1)
 
   const onay = new Discord.MessageEmbed()
@@ -17,10 +17,9 @@ exports.run = async (client, msg, args) => {
     .addField('<a:kalplineon:664765671674216450> Kullanıcı <a:kalplineon:664765671674216450>', hedef, true)
     .addField('<a:hypesquad:664765792285622312> Yetkili <a:hypesquad:664765792285622312>', msg.author, true)
     .setColor(client.ayar.bayan).setThumbnail(client.ayar.logo)
-  client.webhook.kayit.send({username: msg.author.username, avatarURL: msg.author.avatarURL(), embeds: [onay]});
+  await msg.channels.send(onay);
 
-  {if (nick2) return hedef.setNickname(`↯ ${nick} ${nick2}`)};
-  {if (!hedef.roles.cache.get('618218320642179083')) {hedef.roles.remove('674611334981222411')}}};
+  {if (!hedef.roles.cache.get('680741837748961305')) {hedef.roles.remove('747763109351129168')}}};
 
 exports.ayar = {
   komut: 'bayan',
