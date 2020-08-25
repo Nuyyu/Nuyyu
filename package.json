@@ -25,6 +25,6 @@
   "scripts": {
     "heroku-postbuild": "echo Yüklendi ve Temizlendi.",
     "start": "node bot.js"
-  },
+  }
 
 }
