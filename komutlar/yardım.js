@@ -13,7 +13,7 @@ if (!args[0]) {
 	  .setAuthor(`${client.user.username} Komutları `)
 		.setDescription(`${client.emoji.tamir} Komut Listesi ${client.emoji.tamir}\nKomut hakkında bilgi için ${client.ayar.prefix}yardım {KomutAdı}\n\n${str}`)
 		.setColor(client.ayar.klasik)
-    .setFooter(`» [Website (Yapılıyor)]() » ${client.commands.size} Toplam Komut bulunuyor`)
+    .setFooter(`» ${client.commands.size} Toplam Komut bulunuyor`)
     .setThumbnail(client.ayar.logo)
 	message.channel.send(embed); return}
 
