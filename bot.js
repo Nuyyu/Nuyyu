@@ -207,7 +207,7 @@ client.on("guildMemberAdd", async member => {
   var hg = new Discord.MessageEmbed()
     .setAuthor(member.user.username, member.user.avatarURL())
     .setThumbnail(member.user.avatarURL()).setColor('RANDOM')
-    .setDescription(`${client.emoji.elmas} **Hoş Geldin!** Seninle Beraber **${member.guild.memberCount}** Kişiyiz ${client.emoji.elmas}\n${client.emoji.DiscordLoading} ${vakit} ${client.emoji.DiscordLoading}\n${client.emoji.hypesquad} ${gecen} ${client.emoji.hypesquad}\n${takizaman}\n${client.emoji.bildirim} Kayıt için Yetkilileri Etiketlemen Yeterli ${client.emoji.bildirim}\n${client.emoji.ileri} Önemli Bilgileri Dm'e Bıraktık \`\!yardım\`\ ${client.emoji.ileri}`)
+    .setDescription(`${client.emoji.elmas} **Hoş Geldin!** Seninle Beraber **${member.guild.memberCount}** Kişiyiz ${client.emoji.elmas}\n${client.emoji.yildiz} ${vakit} ${client.emoji.yildiz}\n${client.emoji.hypesquad} ${gecen} ${client.emoji.hypesquad}\n${takizaman}\n${client.emoji.bildirim} Kayıt için Yetkilileri Etiketlemen Yeterli ${client.emoji.bildirim}\n${client.emoji.ileri} Önemli Bilgileri Dm'e Bıraktık \`\!yardım\`\ ${client.emoji.ileri}`)
     .setImage(`https://tenor.com/view/real-thor-thor-fight-gif-7320950`).setThumbnail(client.ayar.logo)
 
   await client.channels.cache.get('663099948648235038').send(`||${client.emoji.elmas}  ${member}  <@&747762177028653106>  ${client.emoji.elmas}||`);
