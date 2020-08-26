@@ -265,3 +265,7 @@ tempChannels.registerChannel("693928588176785539", {
   childMaxUsers: 4,
   childFormat: (member, count) => `#${count} | ${member.user.username} Odası`
 });
+
+client.on('message', async message => {
+if (message.content === 'gir') {
+client.emit('guildMemberAdd', message.member || await message.guild.fetchMember(message.author))}});
