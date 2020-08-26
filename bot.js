@@ -57,7 +57,6 @@ client.emoji = {
 	parla: '<a:parla:720956459172495401>',
 	insta: '<a:dokuz:720957324507742270>',
 	ileri: '<a:ileri:664439337076654100>',
-	yildiz: '<a:yildiz:689115349496627249>',
 	dokuzgen: '<a:9gen:689115349496627249>',
 	hayran: '<a:hayran:720956211864010792>',
 	kelebek: '<a:kelebek:734875493907562518>',
@@ -207,7 +206,7 @@ client.on("guildMemberAdd", async member => {
   var hg = new Discord.MessageEmbed()
     .setAuthor(member.user.username, member.user.avatarURL())
     .setThumbnail(member.user.avatarURL()).setColor('RANDOM')
-    .setDescription(`${client.emoji.elmas} **Hoş Geldin!** Seninle Beraber **${member.guild.memberCount}** Kişiyiz ${client.emoji.elmas}\n${client.emoji.yildiz} ${vakit} ${client.emoji.yildiz}\n${client.emoji.ileri} ${gecen} ${client.emoji.ileri}\n${takizaman}\n${client.emoji.bildirim} Kayıt için Yetkilileri Etiketlemen Yeterli ${client.emoji.bildirim}`)
+    .setDescription(`${client.emoji.elmas} **Hoş Geldin!** Seninle Beraber **${member.guild.memberCount}** Kişiyiz ${client.emoji.elmas}\n${client.emoji.elmas} ${vakit} ${client.emoji.elmas}\n${client.emoji.ileri} ${gecen} ${client.emoji.ileri}\n${takizaman}\n${client.emoji.bildirim} Kayıt için Yetkilileri Etiketlemen Yeterli ${client.emoji.bildirim}`)
     .setImage(`https://media1.tenor.com/images/75da925d9a0aa15e970464d7d338a533/tenor.gif?itemid=7320950`).setThumbnail(client.ayar.logo)
 
   await client.channels.cache.get('663099948648235038').send(`||${client.emoji.elmas}  ${member}  <@&747762177028653106>  ${client.emoji.elmas}||`);
