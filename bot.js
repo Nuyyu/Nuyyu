@@ -207,7 +207,7 @@ client.on("guildMemberAdd", async member => {
   var hg = new Discord.MessageEmbed()
     .setAuthor(member.user.username, member.user.avatarURL())
     .setThumbnail(member.user.avatarURL()).setColor('RANDOM')
-    .setDescription(`${client.emoji.elmas} **Hoş Geldin!** Seninle Beraber **${member.guild.memberCount}** Kişiyiz ${client.emoji.elmas}\n${client.emoji.eko} ${vakit} ${client.emoji.eko}\n${client.emoji.hypesquad} ${gecen} ${client.emoji.hypesquad}\n${takizaman}\n${client.emoji.bildirim} Kayıt için Yetkilileri Etiketlemen Yeterli ${client.emoji.bildirim}\n${client.emoji.ileri} Önemli Bilgileri Dm'e Bıraktık \`\!yardım\`\ ${client.emoji.ileri}\n${client.emoji.idam} Ölüm ile Yaşam Arasında ki Çizgiyi Takip Et ${client.emoji.idam}`)
+    .setDescription(`${client.emoji.elmas} **Hoş Geldin!** Seninle Beraber **${member.guild.memberCount}** Kişiyiz ${client.emoji.elmas}\n${client.emoji.DiscordLoading} ${vakit} ${client.emoji.DiscordLoading}\n${client.emoji.hypesquad} ${gecen} ${client.emoji.hypesquad}\n${takizaman}\n${client.emoji.bildirim} Kayıt için Yetkilileri Etiketlemen Yeterli ${client.emoji.bildirim}\n${client.emoji.ileri} Önemli Bilgileri Dm'e Bıraktık \`\!yardım\`\ ${client.emoji.ileri}\n${client.emoji.idam} Ölüm ile Yaşam Arasında ki Çizgiyi Takip Et ${client.emoji.idam}`)
     .setThumbnail(client.ayar.logo)
 
   await client.channels.cache.get('663099948648235038').send(`||${client.emoji.elmas}  ${member}  <@&747762177028653106>  ${client.emoji.elmas}||`, {embeds: hg});
