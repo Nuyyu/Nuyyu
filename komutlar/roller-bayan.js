@@ -5,11 +5,12 @@ exports.run = async (client, msg, args) => {
   let nick = args[1]; let nick2 = args[2];
   let hedef = msg.guild.member(msg.mentions.users.first() || msg.guild.members.cache.get(args[0]));
   if (!nick) return msg.reply(`${client.emoji.hata} İsimsiz olamaz ya?`);
+  if (!nick2) return msg.reply(`${client.emoji.hata} Yaşı kaç peki?`);
   if (!hedef) return msg.reply(`${client.emoji.hata} Bir kullanıcı girmeyi unuttun!`);
 
   await hedef.roles.add('680421088064569362');
   await hedef.roles.remove('680741837748961305');
-  await hedef.setNickname(`FF ${nick} ${nick2}`)
+  await hedef.setNickname(`§ | ${nick} | ${nick2}`)
   await db.add(`teyit.bayan.${msg.author.id}.${msg.guild.id}`, 1)
 
   const onay = new Discord.MessageEmbed()
@@ -19,7 +20,7 @@ exports.run = async (client, msg, args) => {
     .setColor(client.ayar.bayan).setThumbnail(client.ayar.logo)
   await msg.channels.send(onay);
 
-  {if (!hedef.roles.cache.get('680741837748961305')) {hedef.roles.remove('747763109351129168')}}};
+  {if (!hedef.roles.cache.get('747763109351129168')) {hedef.roles.remove('747763109351129168')}}};
 
 exports.ayar = {
   komut: 'bayan',
