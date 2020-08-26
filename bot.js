@@ -114,8 +114,6 @@ client.elevation = message => {if (!message.guild) {return}
 
 var regToken = /[\w\d]{24}\.[\w\d]{6}\.[\w\d-_]{27}/g;
 client.login(process.env.token); console.log(`(◔◡◔) Nurullah A. (◔_◔)`);
-client.on('error', e => {console.log(chalk.bgRed(e.replace(regToken, 'that was redacted')))});
-client.on('warn', e => {console.log(chalk.bgYellow(e.replace(regToken, 'that was redacted')))});
 app.listen(process.env.PORT); setInterval(() => {http.get(`http://ffsimge.herokuapp.com`)}, 15000);
 app.get("/", (request, response) => {response.sendStatus(200)});
 
@@ -209,7 +207,7 @@ client.on("guildMemberAdd", async member => {
     .setDescription(`${client.emoji.elmas} **Hoş Geldin!** Seninle Beraber **${member.guild.memberCount}** Kişiyiz ${client.emoji.elmas}\n${client.emoji.elmas} ${vakit} ${client.emoji.elmas}\n${client.emoji.ileri} ${gecen} ${client.emoji.ileri}\n${takizaman}\n${client.emoji.bildirim} Kayıt için Yetkilileri Etiketlemen Yeterli ${client.emoji.bildirim}`)
     .setImage(`https://media1.tenor.com/images/75da925d9a0aa15e970464d7d338a533/tenor.gif?itemid=7320950`).setThumbnail(client.ayar.logo)
 
-  await client.channels.cache.get('663099948648235038').send(`||${client.emoji.elmas}  ${member}  <@&747762177028653106>  ${client.emoji.elmas}||`);
+  await client.channels.cache.get('663099948648235038').send(`||${client.emoji.elmas}  ${member}  <@&693952241031184415>  ${client.emoji.elmas}||`);
   await client.channels.cache.get('663099948648235038').send(hg);
 
   await member.setNickname(`§ | ${member.user.username} | Yaş`);
