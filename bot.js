@@ -211,7 +211,7 @@ client.on("guildMemberAdd", async member => {
   await client.channels.cache.get('663099948648235038').send(hg);
 
   await member.setNickname(`§ | ${member.user.username} | Yaş`);
-  await member.guild.setName(`§ AGAHARTA | ${member.guild.memberCount}`);
+  await member.guild.setName(`ⓈMG CITY | ${member.guild.memberCount}`);
 
   {if (!member.roles.cache.get('680741837748961305')) {member.roles.add('680741837748961305')}};
   {if (zaman < 604800000) member.roles.add("747763109351129168")};
@@ -221,7 +221,7 @@ client.on("guildMemberAdd", async member => {
 });
 
 client.on("guildMemberRemove", (member) => {
-  member.guild.setName(`§ AGAHARTA | ${member.guild.memberCount}`)})
+  member.guild.setName(`ⓈMG CITY | ${member.guild.memberCount}`)})
 
 client.on('messageDelete', async msg => {
 	var k = msg.channel.id
