@@ -187,8 +187,8 @@ client.on("message", async msg => {
     msg.channel.send(afk
     .setAuthor(USER.username + " AFK")
     .setThumbnail(USER.avatarURL())
-    .addField(`${client.emoji.nana} **Süre:** ${client.emoji.nana}`, `${timeObj.hours} Saat ${timeObj.minutes} Dakika ${timeObj.seconds} Saniye`)
-    .addField(`${client.emoji.eko} **Sebep:** ${client.emoji.eko}`, REASON).setFooter(msg.author.username, msg.author.avatarURL()))}});
+    .addField(`${client.emoji.altigen} **Süre:** ${client.emoji.altigen}`, `${timeObj.hours} Saat ${timeObj.minutes} Dakika ${timeObj.seconds} Saniye`)
+    .addField(`${client.emoji.altigen} **Sebep:** ${client.emoji.altigen}`, REASON).setFooter(msg.author.username, msg.author.avatarURL()))}});
 
 //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\\ Diğerleri //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\\
 client.on("guildMemberAdd", async member => {
