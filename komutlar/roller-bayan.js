@@ -10,7 +10,7 @@ exports.run = async (client, msg, args) => {
 
   await hedef.roles.add('680421088064569362');
   await hedef.roles.remove('680741837748961305');
-  await hedef.setNickname(`Ⓢ | ${nick} | ${nick2}`)
+  await hedef.setNickname(`ꌗ | ${nick} | ${nick2}`)
 
   const onay = new Discord.MessageEmbed()
     .setTitle('<a:dia:669054299539505152>  Yeni Kayıt oluşturuldu  <a:dia:669054299539505152>')

@@ -9,11 +9,11 @@ const app = express(); moment.locale("tr");
 
 client.ayar = {
 	prefix: '!',
-  ismi: 'FF Simge',
+  ismi: 'FF ꌗimge',
   logo: `https://media.discordapp.net/attachments/663099927777247246/747761242550042644/PicsArt_08-25-10.49.13.jpg`,
   sahip: '654249589460697098',
   sunucu: '663049798470991894',
-  tag: '§',
+  tag: 'ꌗ',
   hata: 'RED',
   oldu: 'GRENN',
 	klasik: '2F3136',
@@ -136,9 +136,6 @@ if (cmd) {
     .setAuthor(msg.author.username +" Uyarı", msg.author.avatarURL())
     .setThumbnail(client.ayar.logo).setColor('RED');
 
-  const bakim = db.fetch(`bakim.${client.user.id}`); if (bakim){ if (msg.author.id !== '402369381012865025') {
-  msg.channel.send(`${command} isimli komut şu anda bakımdadır.`); return }}
-
   if (cmd.ayar.aktif === false){ if (!client.ayar.sahip.includes(msg.author.id) && !client.ayar.sahip.includes(msg.author.id)) {
   msg.channel.send(uyari.setDescription(`**${command}** komut geçici olarak kullanıma kapalıdır!`)); return}}
 
@@ -210,18 +207,19 @@ client.on("guildMemberAdd", async member => {
   await client.channels.cache.get('663099948648235038').send(`||${client.emoji.elmas}  ${member}  <@&693952241031184415>  ${client.emoji.elmas}||`);
   await client.channels.cache.get('663099948648235038').send(hg);
 
-  await member.setNickname(`§ | ${member.user.username} | Yaş`);
-  await member.guild.setName(`ⓈMG CITY | ${member.guild.memberCount}`);
+  await member.setNickname(`ꌗ | ${member.user.username} | Yaş`);
+  await member.guild.setName(`ꌗMG CITY | ${member.guild.memberCount}`);
 
   {if (!member.roles.cache.get('680741837748961305')) {member.roles.add('680741837748961305')}};
   {if (zaman < 604800000) member.roles.add("747763109351129168")};
-  {if (!tumHarfler('a', 'z').some(harf => member.user.username.split("").includes(harf))) {member.setNickname("§ | Yasaklı Karakter")
+  {if (!tumHarfler('a', 'z').some(harf => member.user.username.split("").includes(harf))) {member.setNickname("ꌗ | Yasaklı Karakter")
     } else {return} function tumHarfler(charA, charZ) {let a = [], i = charA.charCodeAt(0), j = charZ.charCodeAt(0);
     for (; i <= j; ++i) {a.push(String.fromCharCode(i))} return a}}
 });
 
 client.on("guildMemberRemove", (member) => {
-  member.guild.setName(`ⓈMG CITY | ${member.guild.memberCount}`)})
+	client.channels.cache.get('668389364291862528').send(`${client.emoji.idam} ${member.user}, Sunucudan Ayrılda (\`${member.user.id}\`)`);
+  member.guild.setName(`ꌗMG CITY | ${member.guild.memberCount}`)})
 
 client.on('messageDelete', async msg => {
 	var k = msg.channel.id
@@ -263,7 +261,3 @@ tempChannels.registerChannel("693928588176785539", {
   childMaxUsers: 4,
   childFormat: (member, count) => `#${count} | ${member.user.username} Odası`
 });
-
-client.on('message', async message => {
-if (message.content === 'gir') {
-client.emit('guildMemberAdd', message.member || await message.guild.fetchMember(message.author))}});
