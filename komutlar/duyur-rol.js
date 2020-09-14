@@ -2,10 +2,10 @@ const Discord = require("discord.js");
 
 exports.run = async (client, msg, args) => {
   let rol = msg.mentions.roles.first()
-    if (!rol) return msg.channel.send(`${client.emoji.hata} Bir rol **etiketler misin?**`)
+    if (!rol) return msg.channel.send(` Bir rol **etiketler misin?**`)
 
   let mesaj = args.slice(1).join(" ");
-    if (!mesaj) return msg.channel.send(`${client.emoji.hata} Bir mesaj **yazar mısın?**`)
+    if (!mesaj) return msg.channel.send(` Bir mesaj **yazar mısın?**`)
 
   msg.channel.send(`${client.emoji.onay} Başarıyla \`${rol.id}\` idli rolde olan kişilere Mesaj gönderildi!`)
   msg.guild.roles.cache.get(rol.id).members.map(x => {client.users.cache.get(x.user.id).send(mesaj)})}

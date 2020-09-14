@@ -11,9 +11,6 @@ if(L=="sa"||L=="sea"||L=="selam"||L=="selamun aleyküm"||L=="selamun aleykum"){
 if (L=="naber") {
   return msg.reply(`İyidir senden Naber  ${client.emoji.elmas}`)};
 
-if (L=="hayırlı olsun"||L=="hayirli olsun") {
-  return msg.reply(`Hayırlı olsun  ${client.emoji.elmas}`)};
-
 if (L=="günaydın"||L=="gunaydın"||L=="gunaydin"||L=="günaydın"||L=="günaydin") {
   return msg.reply(`Sanada Günaydın  ${client.emoji.elmas}`)};
 
@@ -22,15 +19,6 @@ if (L=="kayıt"||L=="kayit") {
 
 if (L=="by"||L=="güle"||L=="görüşürüz"||L=="bye") {
   return msg.reply(`İyi günler Tekrar bekleriz  ${client.emoji.elmas}`)};
-
-if (L=="bot") {
-  return msg.reply(`Sen bana bot mu diyorsun? ayıp be!  ${client.emoji.uyar}`)};
-
-if (L=="küstüm"||L=="kustum") {
-  return msg.reply(`Küsme dur, bizi bırakıp Gitme; Sen bize değerlisin!  ${client.emoji.elmas}`)};
-
-if (L=="hile") {
-  return msg.reply(`Kim hile hile Haramdır Haram  ${client.emoji.uyar}`)};
 
 if (L=="yalan") {
   return msg.reply(`Yoo Yalan değil ki?  ${client.emoji.uyar}`)};

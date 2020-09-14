@@ -66,16 +66,6 @@ client.emoji = {
 	KalpAtisi: '<a:KalpAtisi:666985251498885152>',
 	hypesquad: '<a:hypesquad:664765792285622312>',
 	sonsuzluk: '<a:sonsuzluk:664439381272297472>',
-	sifir: '<a:sifir:730893122292285551>',
-  bir: '<a:bir:730893136272031745>',
-  iki: '<a:iki:730893149823565864>',
-  uc: '<a:uc:730893193402515567>',
-  dort: '<a:dort:730893198360051802>',
-  bes: '<a:bes:730893213971382354>',
-	yedi: '<a:yedi:730893240345296997>',
-  alti: '<a:alti:730893226755489812>',
-  sekiz: '<a:sekiz:730893250671673395>',
-  dokuz: '<a:dokuz:730893262415593535>',
 };
 
 //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\\ Komut & Event & Yetkiler //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\\
@@ -217,9 +207,7 @@ client.on("guildMemberAdd", async member => {
     for (; i <= j; ++i) {a.push(String.fromCharCode(i))} return a}}
 });
 
-client.on("guildMemberRemove", (member) => {
-	client.channels.cache.get('668389364291862528').send(`${client.emoji.idam} ${member.user}, Sunucudan Ayrılda (\`${member.user.id}\`)`);
-  member.guild.setName(`ꌗMG CITY | ${member.guild.memberCount}`)})
+client.on("guildMemberRemove", (member) => { member.guild.setName(`ꌗMG CITY | ${member.guild.memberCount}`) })
 
 client.on('messageDelete', async msg => {
 	var k = msg.channel.id
