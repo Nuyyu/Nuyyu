@@ -207,7 +207,9 @@ client.on("guildMemberAdd", async member => {
     for (; i <= j; ++i) {a.push(String.fromCharCode(i))} return a}}
 });
 
-client.on("guildMemberRemove", (member) => { member.guild.setName(`ꌗMG CITY | ${member.guild.memberCount}`) })
+client.on("guildMemberRemove", (member) => {
+  client.channels.cache.get('754894706303041676').send(`${client.emoji.idam} ${member.user}, Sunucudan Ayrılda (\`${member.use.tag}\`)`)
+	member.guild.setName(`ꌗMG CITY | ${member.guild.memberCount}`) })
 
 client.on('messageDelete', async msg => {
 	var k = msg.channel.id
