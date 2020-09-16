@@ -16,7 +16,7 @@ exports.run = async (client, msg, args) => {
     .addField('<a:kalplineon:664765671674216450> Kullanıcı <a:kalplineon:664765671674216450>', hedef, true)
     .addField('<a:hypesquad:664765792285622312> Yetkili <a:hypesquad:664765792285622312>', msg.author, true)
     .setColor(client.ayar.bayan).setThumbnail(client.ayar.logo)
-  await msg.channels.send(onay);
+  await msg.channel.send(onay);
 
   {if (!hedef.roles.cache.get('747763109351129168')) {hedef.roles.remove('747763109351129168')}}};
 
