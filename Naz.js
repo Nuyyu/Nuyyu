@@ -1,4 +1,4 @@
-const { Token, Yetkili, Kanal, Kayıtsız  } = require('./Ayarlar/Ayar.json');
+const { Token, Yetkili, Kanal, Kayıtsız, Üye } = require('./Ayarlar/Ayar.json');
 const { MessageEmbed, Constants, Client } = require('discord.js');
 Constants.DefaultOptions.ws.properties.$browser = "Discord iOS"
 const express = require("express"); const app = express();
@@ -47,6 +47,6 @@ for (let index = 0; index < 5; index++){
   })
 
 
-  .on('voiceStateUpdate', async (oldState, newState) => { if(newState.member.id == bot.user.id) concon = await bot.channels.cache.get(Kanal[index]).join('837011511858954300') })
+  .on('voiceStateUpdate', async (oldState, newState) => { if(newState.member.id == bot.user.id) concon = await bot.channels.cache.get(Kanal[index]).join() })
   .on('guildMemberUpdate', async (oldState, newState) => { if(oldState.member.roles.cache.has(Kayıtsız) && newState.member.roles.cache.has(Üye)){ ses = await concon.play('./Ayarlar/Sesler/Elveda.mp3') }})
 };
