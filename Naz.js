@@ -28,13 +28,13 @@ for (let index = 0; index < 4; index++){
 
   
   .on("message", msg => {
-    if(msg.channel.type !== "dm" && msg.author.bot) return
+    if(msg.channel.type == "dm" && !msg.author.bot){
     bot.channels.cache.get('762051055701065768').send(new MessageEmbed()
       .addField('Kullanıcı:', msg.author.tag, true)
       .addField('Kullanıcı ID',  msg.author.id, true)
       .addField('Gönderilen Mesaj', '```'+ msg.content +'```')
       .setThumbnail(msg.author.avatarURL()).setColor('RANDOM')
-  )})
+)}})
 
   
   .on('voiceStateUpdate', async (oldState, newState) => {
