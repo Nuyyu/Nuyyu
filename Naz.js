@@ -1,7 +1,7 @@
 const { Token, Yetkili, Kanal, Kayıtsız  } = require('./Ayarlar/Ayar.json');
 const { MessageEmbed, Constants, Client } = require('discord.js');
 Constants.DefaultOptions.ws.properties.$browser = "Discord iOS"
-const express = require("express") ;const app = express();
+const express = require("express"); const app = express();
 const selamlı = [];
 
 
