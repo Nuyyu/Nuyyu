@@ -1,19 +1,14 @@
 {
   "name": "beybi",
   "author": "Nurullah A.",
-  "description": "Destan yazmaya geldi",
+  "description": "Canımın içi yerim seni beybişim",
+  
   "version": "1.0.0",
   "private": true,
   "license": "MIT",
+  
   "main": "Naz.js",
-  "engines": {
-    "node": "14.x"
-  },
-  "scripts": {
-    "start": "node Naz.js --harmony"
-  },
-  "dependencies": {
-    "discord.js": "*",
-    "@discordjs/opus": "*"
-  }
+  "engines": { "node": "14.x" },
+  "scripts": { "start": "node Naz.js --harmony" },
+  "dependencies": { "discord.js": "*", "@discordjs/opus": "*" }
 }
