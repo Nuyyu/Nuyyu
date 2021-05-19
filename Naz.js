@@ -5,19 +5,20 @@ const express = require("express") ;const app = express();
 const selamlı = [];
 
 
+process.on("unhandledRejection", err => { console.log(err) })
+       .on('uncaughtException', err => { console.log(err) })
+
+app.get('/', (req, res) => res.send(`https://discord.gg/7Atqdkh`));
+app.listen(process.env.PORT, () => console.log(`📡 Port ayarlandı: ${process.env.PORT} 📡`));
+
+
 for (let index = 0; index < 5; index++){
   const bot = new Client({ disableMentions: "everyone", fetchAllMembers: true })
   let TOKEN = Token[index];
   let concon; let ses;
   bot.login(TOKEN);
 
-  process.on("unhandledRejection", err => { console.log(err) })
-         .on('uncaughtException', err => { console.log(err) })
 
-  app.get('/', (req, res) => res.send(`https://discord.gg/7Atqdkh`));
-  app.listen(process.env.PORT, () => console.log(`📡 Port ayarlandı: ${process.env.PORT} 📡`));
-  
-  
   bot.on('ready', async () => {
     concon = await bot.channels.cache.get(Kanal[index]).join();
     bot.user.setPresence({ activity: { name: `#EfsaneYeniBaşlıyor!` }, });
