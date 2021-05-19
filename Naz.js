@@ -13,7 +13,7 @@ app.get('/', (req, res) => res.send(`https://discord.gg/7Atqdkh`));
 app.listen(process.env.PORT, () => console.log(`📡 Port ayarlandı: ${process.env.PORT} 📡`));
 
 
-for (let index = 0; index < 5; index++){
+for (let index = 0; index < 4; index++){
   const bot = new Client({ disableMentions: "everyone", fetchAllMembers: true })
   let TOKEN = Token[index];
   let concon; let ses;
