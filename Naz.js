@@ -8,6 +8,7 @@ const selamlı = [];
 process.on("unhandledRejection", err => { console.log(err) })
        .on('uncaughtException', err => { console.log(err) })
 
+
 app.get('/', (req, res) => res.send(`https://discord.gg/7Atqdkh`));
 app.listen(process.env.PORT, () => console.log(`📡 Port ayarlandı: ${process.env.PORT} 📡`));
 
@@ -46,6 +47,6 @@ for (let index = 0; index < 5; index++){
   })
 
 
-  .on('guildMemberUpdate', async (oldState, newState) => { if(oldState.roles.highest.rawPosition < newState.roles.highest.rawPosition){ ses = await concon.play('./Ayarlar/Sesler/Elveda.mp3') } else return })
-  .on('voiceStateUpdate', async (oldState, newState) => { if(newState.member.id === bot.user.id) concon = await bot.channels.cache.get(Kanal[index]).join('837011511858954300') })
+  .on('voiceStateUpdate', async (oldState, newState) => { if(newState.member.id == bot.user.id) concon = await bot.channels.cache.get(Kanal[index]).join('837011511858954300') })
+  .on('guildMemberUpdate', async (oldState, newState) => { if(oldState.member.roles.cache.has(Kayıtsız) && newState.member.roles.cache.has(Üye)){ ses = await concon.play('./Ayarlar/Sesler/Elveda.mp3') }})
 };
