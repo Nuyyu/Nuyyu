@@ -1,18 +1,19 @@
 {
-  "name": "naz",
-  "version": "1.0.0",
+  "name": "beybi",
   "author": "Nurullah A.",
   "description": "Destan yazmaya geldi",
-  "main": "canim.js",
+  "version": "1.0.0",
   "private": true,
   "license": "MIT",
+  "main": "Naz.js",
   "engines": {
-    "node": "12.x"
+    "node": "14.x"
   },
   "scripts": {
-    "start": "node canim.js"
+    "start": "node Naz.js --harmony"
   },
   "dependencies": {
-    "discord.js": "11.1"
+    "discord.js": "*",
+    "@discordjs/opus": "*"
   }
 }
