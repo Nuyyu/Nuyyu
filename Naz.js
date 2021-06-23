@@ -50,3 +50,37 @@ for (let index = 0; index < 4; index++){
   .on('voiceStateUpdate', async (oldState, newState) => { if(newState.member.id == bot.user.id) concon = await bot.channels.cache.get(Kanal[index]).join() })
   .on('guildMemberUpdate', async (oldState, newState) => { if(oldState.member.roles.cache.has(Kayıtsız) && newState.member.roles.cache.has(Üye)){ ses = await concon.play('./Ayarlar/Sesler/Elveda.mp3') }})
 };
+
+
+
+const mineflayer = require("mineflayer");
+let Ayar = { host: "AloneTR.aternos.me", port: 44609, username: "↯ Λløne", version: false };
+
+let MC = mineflayer.createBot(Ayar);
+MC.on("chat", function(username, message){
+  if(username === MC.username) return;
+  function intervalFunc(){ MC.setControlState("sprint", true) };
+  setInterval(intervalFunc, 7000);
+
+  MC.chat(`/register NazBebisimiSeviyorum NazBebisimiSeviyorum`);
+  MC.chat(`/login NazBebisimiSeviyorum`); 
+  setInterval(() => { MC.chat("&6&lDiscord Sunucumuz:&b https://discord.gg/7Atqdkh ") }, 300000)  
+});
+
+
+bindEvents(MC);
+function bindEvents(MC){
+  
+  MC.on("error", function(err) { console.log("Bir hata oluştu!") });
+  MC.on("end", function(){ console.log("Bot sunucudan atıldı!"); setTimeout(relog, 5000) });
+
+  function relog() {
+    console.log("Sunucuya Tekrardan Baglaniliyor...");
+    MC = mineflayer.createBot(Ayar);
+    
+    MC.on("chat", function(username, message){
+      if (username === MC.username) return;
+      console.log("Bot tekrardan oyuna giriş yaptı!");
+      MC.chat(`/login NazBebisimiSeviyorum`);
+      MC.setControlState("sprint", true);
+}); bindEvents(MC) }}
