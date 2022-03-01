@@ -10,5 +10,5 @@
   "main": "Naz.js",
   "engines": { "node": "14.x" },
   "scripts": { "start": "node Naz.js --harmony" },
-  "dependencies": { "discord.js": "*", "express": "*", "ffmpeg-static": "*", "@discordjs/opus": "*", "mineflayer": "*" }
+  "dependencies": { "discord.js": "*", "express": "*", "ffmpeg-static": "*", "@discordjs/opus": "*" }
 }
