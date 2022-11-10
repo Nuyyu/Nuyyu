@@ -166,7 +166,7 @@ class Nuyyu {
     this.Height = "1.87"
     this.Birthday = "17/11/2002"
     this.Job = "Student & developer"
-    this.Discord.Tag = "Nuyyu#3210"
+    this.Discord.Tag = "↯ Nuyyu#6008"
  }};
 
 
