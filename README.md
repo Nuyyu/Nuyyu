@@ -156,10 +156,37 @@
 </div>
 
 
+```js
+class Nuyyu {
+  constructor(...options){
+    this.Name = "Nuyyu"
+    this.Type = "Human"
+    this.Sex = "Male"
+    this.Age = "v19.9",
+    this.Height = "1.87"
+    this.Birthday = "17/11/2002"
+    this.Job = "Student & developer"
+    this.Discord.Tag = "ravgar#3210"
+ }};
 
 
+class CreateMan extends Nuyyu {
+  constructor(...options){
+    Super(options)}
+
+  private _Coding(){
+    void "I love coding... ❤️" }
+
+  private _Sleep(ms){
+    return new Promise(resolve => setTimeout(resolve, ms)) }
+
+  async CreateDay(){
+    this._Coding()
+    await this._Sleep(18000000)
+    this.CreateDay()
+}};
 
 
-
-<p>
- <a href="https://discord.com/users/402369381012865025"> <img src="https://lanyard-profile-readme.vercel.app/api/402369381012865025"> </p> </a>
+let Nuyyu = new CreateMan()
+Batuuu.CreateDay();
+```
