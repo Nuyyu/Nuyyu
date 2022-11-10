@@ -14,7 +14,7 @@
 
 <ul>
 <li>👋 Hi, I’m @Nuyyu</li>
-<li>❤️I love developing software (Mostly with  JavaScript & Python)</li>
+<li>❤️ I love developing software (Mostly with  JavaScript & Python)</li>
 <li>🌱 I'm currently working on Game Development</li>
 <li>💼 I'm a Full-stack developer at home</li>
 <li>💬 Ask me about anything <a  href="https://discord.com/channels/@me/402369381012865025">here!</a> I am happy to help.</li>
