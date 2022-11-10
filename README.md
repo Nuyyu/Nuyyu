@@ -188,5 +188,5 @@ class CreateMan extends Nuyyu {
 
 
 let Nuyyu = new CreateMan()
-Batuuu.CreateDay();
+Nuyyu.CreateDay();
 ```
